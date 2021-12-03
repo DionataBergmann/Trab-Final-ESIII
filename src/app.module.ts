@@ -4,6 +4,7 @@ import { join } from 'path';
 import { AppService } from './app.service';
 import { StudentsModule } from './modules/students/students.module';
 import { CollaboratorsModule } from './modules/collaborators/collaborators.module';
+import { ServicesModule } from './modules/services/services.module';
 import { TasksModule } from './modules/tasks/tasks.module';
 import { ServicesModule } from './modules/services/services.module';
 import { TasksModule } from './modules/tasks/tasks.module';
