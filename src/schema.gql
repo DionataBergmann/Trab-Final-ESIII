@@ -2,28 +2,70 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input CreateStudentInput {
+type Collaborator {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateCollaboratorInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateServiceInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateTaskInput {
   """Example field (placeholder)"""
   exampleField: Int!
 }
 
 type Mutation {
-  createStudent(createStudentInput: CreateStudentInput!): Student!
-  removeStudent(id: Int!): Student!
-  updateStudent(updateStudentInput: UpdateStudentInput!): Student!
+  createCollaborator(createCollaboratorInput: CreateCollaboratorInput!): Collaborator!
+  createService(createServiceInput: CreateServiceInput!): Service!
+  createTask(createTaskInput: CreateTaskInput!): Task!
+  removeCollaborator(id: Int!): Collaborator!
+  removeService(id: Int!): Service!
+  removeTask(id: Int!): Task!
+  updateCollaborator(updateCollaboratorInput: UpdateCollaboratorInput!): Collaborator!
+  updateService(updateServiceInput: UpdateServiceInput!): Service!
+  updateTask(updateTaskInput: UpdateTaskInput!): Task!
 }
 
 type Query {
-  student(id: Int!): Student!
-  students: [Student!]!
+  collaborator(id: Int!): Collaborator!
+  collaborators: [Collaborator!]!
+  service(id: Int!): Service!
+  services: [Service!]!
+  task(id: Int!): Task!
+  tasks: [Task!]!
 }
 
-type Student {
+type Service {
   """Example field (placeholder)"""
   exampleField: Int!
 }
 
-input UpdateStudentInput {
+type Task {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateCollaboratorInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateServiceInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateTaskInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!
