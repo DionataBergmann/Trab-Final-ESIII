@@ -3,13 +3,93 @@
 # ------------------------------------------------------
 
 type Collaborator {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  CPF: String!
+  id: Float!
+  name: String!
+}
+
+type CollaboratorAggregateGroupBy {
+  CPF: String
+  name: String
+}
+
+type CollaboratorConnection {
+  """Array of nodes."""
+  nodes: [Collaborator!]!
+
+  """Paging information"""
+  pageInfo: OffsetPageInfo!
+
+  """Fetch total count of records"""
+  totalCount: Int!
+}
+
+type CollaboratorCountAggregate {
+  CPF: Int
+  name: Int
+}
+
+input CollaboratorDeleteFilter {
+  CPF: StringFieldComparison
+  and: [CollaboratorDeleteFilter!]
+  name: StringFieldComparison
+  or: [CollaboratorDeleteFilter!]
+}
+
+type CollaboratorDeleteResponse {
+  CPF: String
+  id: Float
+  name: String
+}
+
+input CollaboratorFilter {
+  CPF: StringFieldComparison
+  and: [CollaboratorFilter!]
+  name: StringFieldComparison
+  or: [CollaboratorFilter!]
+}
+
+type CollaboratorMaxAggregate {
+  CPF: String
+  name: String
+}
+
+type CollaboratorMinAggregate {
+  CPF: String
+  name: String
+}
+
+input CollaboratorSort {
+  direction: SortDirection!
+  field: CollaboratorSortFields!
+  nulls: SortNulls
+}
+
+enum CollaboratorSortFields {
+  CPF
+  name
+}
+
+input CollaboratorUpdateFilter {
+  CPF: StringFieldComparison
+  and: [CollaboratorUpdateFilter!]
+  name: StringFieldComparison
+  or: [CollaboratorUpdateFilter!]
 }
 
 input CreateCollaboratorInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  CPF: String!
+  name: String!
+}
+
+input CreateManyCollaboratorsInput {
+  """Array of records to create"""
+  collaborators: [CreateCollaboratorInput!]!
+}
+
+input CreateOneCollaboratorInput {
+  """The record to create"""
+  collaborator: CreateCollaboratorInput!
 }
 
 input CreateServiceInput {
@@ -22,21 +102,67 @@ input CreateTaskInput {
   exampleField: Int!
 }
 
+input DeleteManyCollaboratorsInput {
+  """Filter to find records to delete"""
+  filter: CollaboratorDeleteFilter!
+}
+
+type DeleteManyResponse {
+  """The number of records deleted."""
+  deletedCount: Int!
+}
+
+input DeleteOneCollaboratorInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
 type Mutation {
-  createCollaborator(createCollaboratorInput: CreateCollaboratorInput!): Collaborator!
+  createManyCollaborators(input: CreateManyCollaboratorsInput!): [Collaborator!]!
+  createOneCollaborator(input: CreateOneCollaboratorInput!): Collaborator!
   createService(createServiceInput: CreateServiceInput!): Service!
   createTask(createTaskInput: CreateTaskInput!): Task!
-  removeCollaborator(id: Int!): Collaborator!
+  deleteManyCollaborators(input: DeleteManyCollaboratorsInput!): DeleteManyResponse!
+  deleteOneCollaborator(input: DeleteOneCollaboratorInput!): CollaboratorDeleteResponse!
   removeService(id: Int!): Service!
   removeTask(id: Int!): Task!
-  updateCollaborator(updateCollaboratorInput: UpdateCollaboratorInput!): Collaborator!
+  updateManyCollaborators(input: UpdateManyCollaboratorsInput!): UpdateManyResponse!
+  updateOneCollaborator(input: UpdateOneCollaboratorInput!): Collaborator!
   updateService(updateServiceInput: UpdateServiceInput!): Service!
   updateTask(updateTaskInput: UpdateTaskInput!): Task!
 }
 
+type OffsetPageInfo {
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+}
+
+input OffsetPaging {
+  """Limit the number of records returned"""
+  limit: Int
+
+  """Offset to start returning records from"""
+  offset: Int
+}
+
 type Query {
-  collaborator(id: Int!): Collaborator!
-  collaborators: [Collaborator!]!
+  collaborator(
+    """The id of the record to find."""
+    id: ID!
+  ): Collaborator
+  collaborators(
+    """Specify to filter the records returned."""
+    filter: CollaboratorFilter = {}
+
+    """Limit or page results."""
+    paging: OffsetPaging = {limit: 10}
+
+    """Specify to sort results."""
+    sorting: [CollaboratorSort!] = []
+  ): CollaboratorConnection!
   service(id: Int!): Service!
   services: [Service!]!
   task(id: Int!): Task!
@@ -48,15 +174,65 @@ type Service {
   exampleField: Int!
 }
 
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+input StringFieldComparison {
+  eq: String
+  gt: String
+  gte: String
+  iLike: String
+  in: [String!]
+  is: Boolean
+  isNot: Boolean
+  like: String
+  lt: String
+  lte: String
+  neq: String
+  notILike: String
+  notIn: [String!]
+  notLike: String
+}
+
 type Task {
   """Example field (placeholder)"""
   exampleField: Int!
 }
 
 input UpdateCollaboratorInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  CPF: String
+  id: ID
+  name: String
+}
+
+input UpdateManyCollaboratorsInput {
+  """Filter used to find fields to update"""
+  filter: CollaboratorUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateCollaboratorInput!
+}
+
+type UpdateManyResponse {
+  """The number of records updated."""
+  updatedCount: Int!
+}
+
+input UpdateOneCollaboratorInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateCollaboratorInput!
 }
 
 input UpdateServiceInput {
