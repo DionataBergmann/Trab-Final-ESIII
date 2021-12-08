@@ -1,15 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from 'src/modules/base/entities/base.entity';
+import { Task } from 'src/modules/tasks/entities/task.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
-export class Collaborator {
+export class Collaborator extends BaseEntity {
 
-@PrimaryGeneratedColumn('uuid')
-id:number;
+  @Column()
+  name: string;
+  
+  @Column()
+  CPF: string;
 
-@Column()
-name: string;
-
-@Column()
-CPF: string;
-
+  @OneToMany(() => Task, (tasks) => tasks.collaborator)
+  tasks: Task[];
 }

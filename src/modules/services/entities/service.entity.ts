@@ -1,7 +1,17 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { BaseEntity } from 'src/modules/base/entities/base.entity';
+import { Task } from 'src/modules/tasks/entities/task.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
-@ObjectType()
-export class Service {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+@Entity()
+export class Service extends BaseEntity{
+
+  @Column()
+  name: string;
+
+  @Column()
+  expectedDeliveryDate: Date;
+
+  @OneToMany(() => Task, (tasks) => tasks.service,{ nullable: true })
+  tasks?: Task[];
+  
 }

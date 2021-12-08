@@ -1,16 +1,16 @@
-import { FilterableField } from '@nestjs-query/query-graphql';
-import { Field, ObjectType } from '@nestjs/graphql';
+import { FilterableField, FilterableOffsetConnection } from "@nestjs-query/query-graphql";
+import { ObjectType } from "@nestjs/graphql";
+import { BaseDTO } from "src/modules/base/dto/base.dto";
+import { TaskDTO } from "src/modules/tasks/dto/task.dto";
 
 @ObjectType('Collaborator')
-export class CollaboratorDTO {
+@FilterableOffsetConnection('tasks', () => TaskDTO, { nullable: true })
+export class CollaboratorDTO extends BaseDTO{
 
-@Field()
-id:number;
-
-@FilterableField()
-name: string;
-
-@FilterableField()
-CPF: string;
+  @FilterableField()
+  name: string;
+  
+  @FilterableField()
+  CPF: string;
 
 }
